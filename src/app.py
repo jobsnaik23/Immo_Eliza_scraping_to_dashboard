@@ -1,5 +1,7 @@
 import os
 import uvicorn
+import joblib
+import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
@@ -35,17 +37,32 @@ def predict_info():
         "To get a price prediction, send a POST request with a JSON object containing "
         "property details such as 'living_area', 'rooms_number', and 'zip_code'."
     )
+# 1. Laad je getrainde model (zorg dat het pad klopt)
+model = joblib.load("models/best_model.pkl")
 
+# 2. Update de POST route
 @app.post("/predict")
 def predict_price(data: HouseData):
-    """
-    Receives house data in JSON format and returns a predicted price.
-    Note: Replace the dummy logic with your actual model.predict()
-    """
+    # Zet de JSON data om naar een Pandas DataFrame (zoals je model verwacht)
+    input_df = pd.DataFrame([data.dict()])
+    
+    # Voer de voorspelling uit
+    prediction = model.predict(input_df)
+    
+    # Geef de prijs terug (we pakken het eerste resultaat uit de lijst)
+    return {"prediction": float(prediction[0])}
+"""
+@app.post("/predict")
+def predict_price(data: HouseData):
+    
+    #Receives house data in JSON format and returns a predicted price.
+    #Note: Replace the dummy logic with your actual model.predict()
+    
     # Example logic:
     # prediction = model.predict([list(data.dict().values())])
     prediction = 250000 
     return {"prediction": prediction}
+    """
 
 if __name__ == "__main__":
     # Render uses the PORT environment variable
