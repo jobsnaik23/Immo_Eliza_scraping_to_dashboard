@@ -37,20 +37,20 @@ def predict_info():
         "To get a price prediction, send a POST request with a JSON object containing "
         "property details such as 'living_area', 'rooms_number', and 'zip_code'."
     )
-# 1. Laad je getrainde model (zorg dat het pad klopt)
+# 1.Load your trained model (ensure the path is correct)
 model = joblib.load("models/best_model.pkl")
 
 # 2. Update de POST route
 @app.post("/predict")
 def predict_price(data: HouseData):
-    # Zet de JSON data om naar een Pandas DataFrame (zoals je model verwacht)
+    # Convert the JSON data to a Pandas DataFrame (as your model expects)
     input_df = pd.DataFrame([data.dict()])
     
-    # Voer de voorspelling uit
+    # Run the prediction
     prediction = model.predict(input_df)
     
-    # Geef de prijs terug (we pakken het eerste resultaat uit de lijst)
-    return {"prediction": float(prediction[0])}
+    # Return the price (we take the first result from the list)
+    return {"prediction": float(prediction)}
 """
 @app.post("/predict")
 def predict_price(data: HouseData):
