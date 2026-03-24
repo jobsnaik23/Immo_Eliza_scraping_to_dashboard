@@ -50,7 +50,7 @@ def predict_price(data: HouseData):
     prediction = model.predict(input_df)
     
     # Return the price (we take the first result from the list)
-    return {"prediction": float(prediction)}
+    return {"prediction": float(prediction[0])}
 """
 @app.post("/predict")
 def predict_price(data: HouseData):
@@ -60,7 +60,7 @@ def predict_price(data: HouseData):
     
     # Example logic:
     # prediction = model.predict([list(data.dict().values())])
-    prediction = 250000 
+    #prediction = 250000 
     return {"prediction": prediction}
     """
 
