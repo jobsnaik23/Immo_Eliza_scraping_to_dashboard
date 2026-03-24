@@ -113,7 +113,7 @@ The API is deployed on Render and provides real-time property price estimations.
 
 
 **Example Request Body:**
-```json
+json
 {
   "living_area": 120,
   "rooms_number": 2,
