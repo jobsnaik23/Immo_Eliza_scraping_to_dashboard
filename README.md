@@ -120,3 +120,24 @@ The API is deployed on Render and provides real-time property price estimations.
   "zip_code": 1000,
   "garden": true
 }
+
+
+## 🚀 Deployment & API Usage
+
+The API is hosted on **Render**. You can interact with it using the following details:
+
+### Base URL
+`https://your-app-name.onrender.com`
+
+### Interactive API Docs (Swagger)
+You can test the API directly at: `https://your-app-name.onrender.com`
+
+### Example Request (POST)
+To get a prediction, send a JSON object to `/predict`:
+```json
+{
+  "living_area": 120,
+  "rooms_number": 3,
+  "zip_code": 1000,
+  "garden": true
+}
