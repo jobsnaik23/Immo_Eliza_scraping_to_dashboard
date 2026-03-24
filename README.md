@@ -68,7 +68,7 @@ The script automatically selects and saves the model with the highest R² Score 
 
 Launch the web interface to predict prices:
 
-streamlit run src/app.py
+streamlit run app/app.py
 
 ---
 
